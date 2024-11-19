@@ -1,0 +1,436 @@
+<html lang="en">
+<head>
+    <title>ADA Session Demo Page</title>
+    <meta name="title" content="ADA based session">
+    <meta name="description" content="Demo page for a session on ADA">
+    <meta name="keywords" content="keywords">
+    <meta name="author" content="author">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <style>
+        /* Variables */
+        :root {
+            --black: #000;
+            --white: #fff;
+            --lightblue: #add8e6;
+            --red: #ff0000;
+            --darkblue: darkblue;
+        }
+
+        /* Common styles */
+        html {
+            line-height: 1.15; /* 1 */
+            -webkit-text-size-adjust: 100%; /* 2 */
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            position: relative;
+        }
+        hr {
+            box-sizing: content-box; /* 1 */
+            height: 0; /* 1 */
+            overflow: visible; /* 2 */
+        }
+        p {
+            line-height: 1.5;
+        }
+        a {
+            text-decoration: none !important;
+            font-weight: 700;
+            color: var(--white);
+            &:hover {
+            color: var(--red);
+            }
+        }
+        img {
+            border-style: none;
+        }
+        h1 {
+            margin: 0;
+        }
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        figure {
+            margin: 0;
+        }
+        button,
+        [type="button"],
+        [type="reset"],
+        [type="submit"] {
+            -webkit-appearance: button;
+            min-width: 44px;
+            min-height: 44px;
+            border: transparent;
+            box-shadow: none;
+            padding: 20px;
+        }
+        button::-moz-focus-inner,
+        [type="button"]::-moz-focus-inner,
+        [type="reset"]::-moz-focus-inner,
+        [type="submit"]::-moz-focus-inner {
+            border-style: none;
+            padding: 0;
+        }
+        ul {
+            display: flex;
+            gap: 30px;
+        }
+        ul li {
+            list-style-type: none;
+        }
+        form p {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        form input[type="submit"] {
+            width: max-content;
+            padding: 13px 50px;
+            font-weight: 700;
+        
+        }
+        input, select {
+            padding: 0.6rem;
+            border: none;
+            background: rgba(0,0,0,0.06);
+            width: 80%;
+            border-radius: 8px;
+        }
+        *:not(.logo-cntr):focus {
+            outline: 2px dashed var(--black);
+        }
+
+        /* Page specific styles */
+        a.skip-main {
+            left:-999px;
+            position:absolute;
+            top:auto;
+            width:1px;
+            height:1px;
+            overflow:hidden;
+            z-index:-999;
+            color: var(--black);
+        }
+        a.skip-main:focus, a.skip-main:active {
+            left: auto;
+            top: auto;
+            width: 30%;
+            height: auto;
+            overflow:auto;
+            margin: 10px 5%;
+            text-align:center;
+            font-size:1.2em;
+            z-index:999;
+        }
+        .btn-lnk {
+            min-width: 45px;
+            min-height: 25px;
+            display: table-cell;
+            vertical-align: middle;
+            border: transparent;
+            box-shadow: none;
+            padding: 14px 10px;
+            background-color: var(--black);
+            border-radius: 0.5rem;
+            -webkit-border-radius: 0.5rem;
+            -moz-border-radius: 0.5rem;
+            -ms-border-radius: 0.5rem;
+            -o-border-radius: 0.5rem;
+            border: 2px solid var(--black);
+            text-align: center;
+            color: var(--white);
+            cursor: pointer;
+            &:hover {
+                color: var(--black);
+                background-color: var(--white);
+            }
+        }
+        .fl-container:not(footer) {
+            padding: 1rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .centered-cnt {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        .gen-form-lt {
+            border: 1px solid var(--black);
+            border-radius: 8px;
+            padding: 2rem;
+            width: 600px;
+            margin: 0 auto;
+            margin: 100px auto;
+        }
+        .dot-cntr {
+            display: flex;
+            justify-content: center;
+        }
+        header {
+            box-shadow: 0 -7px 22px 7px var(--lightblue);
+        }
+        header .logo-cntr img,
+        header .logo-cntr a {
+            width: 95px;
+            height: 27px;
+            display: block;
+            padding: 10px;
+        }
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+        .banner-cntr img {
+            width: 100%;
+        }
+        footer.fl-container {
+            background-color: rgba(0,0,0,0.7);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 2rem 8px;
+        }
+        /* Slideshow container */
+        .slideshow-container {
+            max-width: 1000px;
+            height: 300px;
+            position: relative;
+            margin: auto;
+        }
+        .slideshow-container img {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Hide the images by default */
+        .mySlides {
+            display: none;
+        }
+
+        /* Next & previous buttons */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+        .prev {
+            left: 0;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        /* Caption text */
+        .text {
+            color: #f2f2f2;
+            font-size: 15px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        /* The dots/bullets/indicators */
+        .dot-wr {
+            width: 45px;
+            height: 45px;
+        }
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+        .active, .dot:hover {
+            background-color: #717171;
+        }
+        .slider-cntr {
+            width: 90%;
+            margin: 0 auto;
+            text-align: center;
+            margin: 100px auto;
+        }
+
+        /* Fading animation */
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @keyframes fade {
+            from {opacity: .4}
+            to {opacity: 1}
+        }
+    </style>
+
+</head>
+<body>
+    <header class="fl-container">
+        <a class="skip-main" href="#main">Skip to main content</a>
+        <h1>
+            <a href="#" class="logo-cntr">
+                <img src="./images/ada-logo.png" alt="logo">
+            </a>
+        </h1>
+        <ul>
+            <li><a href="/gallery" class="btn btn-lnk">Gallery</a></li>
+            <li><a href="/blogs" class="btn btn-lnk">Blogs</a></li>
+            <li><a href="/signin" class="btn btn-lnk">Signin</a></li>
+        </ul>
+    </header>
+    <main id="main">
+        <figure class="banner-cntr">
+            <img src="./images/banner-2.jpg" alt="banner">
+        </figure>
+
+        <section class="slider-cntr">
+            <h2>Sliders</h2>
+            <!-- Slideshow container -->
+            <div class="slideshow-container">
+
+                <!-- Full-width images with number and caption text -->
+                <div class="mySlides fade">
+                    <div class="numbertext">1 / 3</div>
+                    <img src="./images/imgone.jpeg" alt="river" aria-label="river">
+                    <div class="text">Caption Text</div>
+                </div>
+            
+                <div class="mySlides fade">
+                    <div class="numbertext">2 / 3</div>
+                    <img src="./images/imgtwo.jpeg" alt="sea" aria-label="sea">
+                    <div class="text">Caption Two</div>
+                </div>
+            
+                <div class="mySlides fade">
+                    <div class="numbertext">3 / 3</div>
+                    <img src="./images/imgthree.jpg" alt="sky" aria-label="sky">
+                    <div class="text">Caption Three</div>
+                </div>
+            
+                <!-- Next and previous buttons -->
+                <a class="prev" onclick="plusSlides(-1)" href="javascript:void(0)" role="link" aria-label="click to view previous slide">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)" href="javascript:void(0)" role="link" aria-label="click to view next slide">&#10095;</a>
+            </div>
+    
+            <!-- The dots/circles -->
+            <div style="text-align:center" class="dot-cntr">
+                <div class="dot-wr" onclick="currentSlide(1)" onkeydown="currentSlide(1)" tabindex="0" role="button" aria-label="click to view first slide">
+                    <span class="dot"></span>
+                </div>
+                <div class="dot-wr" onclick="currentSlide(2)" onkeydown="currentSlide(2)" tabindex="0" role="button" aria-label="click to view second slide">
+                    <span class="dot"></span>
+                </div>
+                <div class="dot-wr" onclick="currentSlide(3)" onkeydown="currentSlide(3)" tabindex="0" role="button" aria-label="click to view third slide">
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </section>
+
+        <form action="#" method="POST" class="gen-form-lt centered-cnt ">
+            <p>
+                <label for="first-name">First Name</label>
+                <input type="text" name="firstname" id="first-name" placeholder="Enter first name">
+            </p>
+            <p>
+                <label for="last-name">Last Name</label>
+                <input type="text" name="lastname" id="last-name" placeholder="Enter last name">
+            </p>
+            <p>
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" placeholder="Enter email">
+            </p>
+            <p>
+                <label for="contact">Contact</label>
+                <input type="text" name="contact" id="contact" placeholder="Enter contact number">
+            </p>
+            <p>
+                <label for="state">State</label>
+                <select name="state" id="state">
+                    <option value="-1" disabled selected>Select state</option>
+                    <option value="1">Kerala</option>
+                    <option value="2">Tamil Nadu</option>
+                    <option value="3">Karnataka</option>
+                    <option value="4">Andhra Pradesh</option>
+                    <option value="5">Madhya Pradesh</option>
+                </select>
+            </p>
+            <input type="submit" value="Submit" class="btn-lnk fm-submit-btn">
+        </form>
+    </main>
+    <footer class="fl-container">
+        © ADA 2024. All Rights Reserved. <a href="/privacy">Privacy &amp; Cookies Policy</a>
+    </footer>
+
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        // Next/previous controls
+        function plusSlides(n) {
+        showSlides(slideIndex += n);
+        }
+
+        // Thumbnail image controls
+        function currentSlide(n) {
+        showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active";
+        }
+    </script>
+</body>
+</html>
+
+
